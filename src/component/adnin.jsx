@@ -89,7 +89,7 @@ const Dashboard = () => {
     const fetchMessages = async () => {
         setLoading(true);
         try {
-            const response = await axios.get("http://localhost:5000/contact");
+            const response = await axios.get("https://reingenbackend.onrender.com/contact");
             setMessages(response.data);
         } catch (error) {
             notification.error({ message: "Error fetching messages" });
