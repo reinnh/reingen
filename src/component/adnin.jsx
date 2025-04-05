@@ -1,78 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button, Switch, notification, Modal, Input } from "antd";
+import { Table, Button, Switch, notification, Modal, Input, message } from "antd";
 import { SunOutlined, MoonOutlined, DeleteOutlined, ReloadOutlined, MailOutlined } from "@ant-design/icons";
 import axios from "axios";
 import "antd/dist/reset.css";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from "recharts";
 
 const { TextArea } = Input;
-
-const dataDaily = [
-    { date: "2024-03-25", visits: 120 },
-    { date: "2024-03-26", visits: 150 },
-    { date: "2024-03-27", visits: 100 },
-    { date: "2024-03-28", visits: 180 },
-];
-
-const dataMonthly = [
-    { month: "Jan", visits: 3200 },
-    { month: "Feb", visits: 2800 },
-    { month: "Mar", visits: 3500 },
-    { month: "Apr", visits: 4000 },
-];
-
-const dataYearly = [
-    { year: "2021", visits: 42000 },
-    { year: "2022", visits: 50000 },
-    { year: "2023", visits: 62000 },
-    { year: "2024", visits: 70000 },
-];
-
-export const DashboardGraphs = ({ darkMode }) => {
-    return (
-        <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 px-4`}> 
-            <div className={`p-4 rounded-xl shadow w-full ${darkMode ? "bg-gray-800" : "bg-white"}`}>
-                <h2 className="text-lg font-bold mb-2">Daily Visits</h2>
-                <ResponsiveContainer width="100%" height={300}>
-                    <LineChart data={dataDaily}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="date" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Line type="monotone" dataKey="visits" stroke="#8884d8" />
-                    </LineChart>
-                </ResponsiveContainer>
-            </div>
-            <div className={`p-4 rounded-xl shadow w-full ${darkMode ? "bg-gray-800" : "bg-white"}`}>
-                <h2 className="text-lg font-bold mb-2">Monthly Visits</h2>
-                <ResponsiveContainer width="100%" height={300}>
-                    <BarChart data={dataMonthly}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Bar dataKey="visits" fill="#82ca9d" />
-                    </BarChart>
-                </ResponsiveContainer>
-            </div>
-            <div className={`p-4 rounded-xl shadow col-span-1 md:col-span-2 w-full ${darkMode ? "bg-gray-800" : "bg-white"}`}>
-                <h2 className="text-lg font-bold mb-2">Yearly Visits</h2>
-                <ResponsiveContainer width="100%" height={300}>
-                    <LineChart data={dataYearly}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="year" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Line type="monotone" dataKey="visits" stroke="#ff7300" />
-                    </LineChart>
-                </ResponsiveContainer>
-            </div>
-        </div>
-    );
-};
 
 const Dashboard = () => {
     const [messages, setMessages] = useState([]);
@@ -97,11 +29,54 @@ const Dashboard = () => {
         setLoading(false);
     };
 
+    const handleReply = (email) => {
+        setSelectedEmail(email);
+        setReplyVisible(true);
+    };
+
+    const sendReply = async () => {
+        if (!replyMessage.trim()) {
+            notification.warning({ message: "Reply message cannot be empty" });
+            return;
+        }
+        try {
+            await axios.post("https://your-backend-url.com/send-email", {
+                to: selectedEmail,
+                message: replyMessage,
+            });
+            notification.success({ message: "Reply sent successfully" });
+            setReplyVisible(false);
+            setReplyMessage("");
+        } catch (error) {
+            notification.error({ message: "Error sending reply" });
+        }
+    };
+
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`https://reingenbackend.onrender.com/contact/${id}`);
+            message.success("Message deleted successfully");
+            fetchMessages();
+        } catch (error) {
+            notification.error({ message: "Error deleting message" });
+        }
+    };
+
     const columns = [
         { title: "Name", dataIndex: "name", key: "name" },
         { title: "Email", dataIndex: "email", key: "email" },
         { title: "Message", dataIndex: "message", key: "message" },
         { title: "Time", dataIndex: "createdAt", key: "createdAt" },
+        {
+            title: "Actions",
+            key: "actions",
+            render: (text, record) => (
+                <div className="flex gap-2">
+                    <Button icon={<MailOutlined />} onClick={() => handleReply(record.email)}>Reply</Button>
+                    <Button icon={<DeleteOutlined />} danger onClick={() => handleDelete(record._id)}>Delete</Button>
+                </div>
+            ),
+        },
     ];
 
     return (
@@ -121,9 +96,19 @@ const Dashboard = () => {
             <div className="overflow-x-auto">
                 <Table columns={columns} dataSource={messages} rowKey="_id" loading={loading} pagination={{ pageSize: 5 }} />
             </div>
-            <DashboardGraphs darkMode={darkMode} />
+            
+            <Modal
+                title="Reply to Message"
+                visible={replyVisible}
+                onCancel={() => setReplyVisible(false)}
+                onOk={sendReply}
+            >
+                <p>Replying to: {selectedEmail}</p>
+                <TextArea rows={4} value={replyMessage} onChange={(e) => setReplyMessage(e.target.value)} placeholder="Enter your reply here..." />
+            </Modal>
         </div>
     );
 };
 
 export default Dashboard;
+

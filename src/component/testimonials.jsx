@@ -20,12 +20,6 @@ const testimonials = [
     role: "Blockchain Expert",
     company: "Noa Watch-Only-Wallet Solutions",
   },
-  {
-    name: "krypton",
-    feedback: "Absolutely blown away, reingen did not just build website,they created a whole experience. The 3D element , smooth transitions and insane attention to detail made my brand looks futuristic and premium...best investment",
-    role: "Project Manager",
-    company: "BuildTech",
-  },
 ];
 
 const TestimonialCard = ({ name, feedback, role, company }) => {

@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { close, logo, menu } from '../assets';
+/* import { Link } from 'react-router-dom'; */
+/* import { close, logo, menu } from '../assets/'; */
+import close from '../assets/close.svg';
+import logo from '../assets/logo.svg'
+import menu from '../assets/menu.svg'
 import { navLinks } from '../constants';
 import { styles } from '../styles';
 import me from '../assets/projects/colme.png'
+import { Link } from 'react-scroll';
 
 const Navbar = () => {
   const [active, setActive] = useState('');
@@ -35,7 +39,9 @@ const Navbar = () => {
             }
           }}
         >
-          <a href={`#${link.id}`}>{link.title}</a>
+        <Link to={`${link.id}`} smooth={true} duration={800}>
+        <a href={`#${link.id}`}>{link.title}</a>
+        </Link>
         </li>
       ))}
       <li

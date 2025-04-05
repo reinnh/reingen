@@ -1,4 +1,3 @@
-import React, { use } from "react";
 import { motion } from "framer-motion";
 import './custom.css'
 import {useState, useEffect} from 'react'

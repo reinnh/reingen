@@ -1,5 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
 export default function AboutMeCard() {
   return (
     <div className=" flex justify-center bg-gray-950 my-5  border-white "

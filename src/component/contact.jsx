@@ -89,7 +89,7 @@ export const ContactCard1 = () => {
                     
                     <button type="button" className="bg-blue-600 p-2 rounded text-white" onClick={handleSend}>Send</button>
                     
-                    <div className="relative md:hidden">
+                    <div className="relative ">
                         {toast && <ShowToast message={toast.message} type={toast.type} />}
                     </div>
                 </form>
@@ -106,7 +106,7 @@ export const ContactCard = () => {
                 <div className="container pl-5 md:pl-0">Contact us</div>
             </div>
             <div className="w-full bg-gray-950 flex justify-center">
-                <div className="flex flex-col-reverse md:flex-row w-full justify-between py-6 container items-center gap-y-10 bg-gray-950">
+                <div className="flex flex-col-reverse md:flex-row w-full justify-between py-6 container text-white items-center gap-y-10 bg-gray-950">
                     <ContactCard1 />
                     <div className="w-sm md:flex hidden">
                         <div>

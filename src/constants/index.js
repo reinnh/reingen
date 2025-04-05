@@ -1,15 +1,4 @@
-import {
-    javascript,
-    html,
-    css,
-    reactjs,
-    tailwind,
-    nodejs,
-    git,
-    edunet,
-    mathwork,
-    eduskill,
-  } from "../assets";
+
   import image from '../assets/projects/image.png'
   import reinhard from '../assets/projects/reinlaptop.png'
   import photo from '../assets/projects/photography.jpg'
@@ -31,21 +20,12 @@ import {
   
   
   
-  export const technologies = [
-    { name: "HTML 5", icon: html },
-    { name: "CSS 3", icon: css },
-    { name: "JavaScript", icon: javascript },
-    { name: "Rect JS", icon: reactjs },
-    { name: "Tailwind CSS", icon: tailwind },
-    { name: "Node JS", icon: nodejs },
-    { name: "git", icon: git },
-  ];
   
   export const experiences = [
     {
       title: "Personal Web Development",
       company_name: "",
-      icon: eduskill,
+      icon: '',
       iconBg: "#161329",
       date: "Sep 2024 - Current",
       points: [
@@ -56,7 +36,7 @@ import {
     {
       title: "Freelance Web Development",
       company_name: "Fransisco Organization",
-      icon: mathwork,
+      icon: '',
       iconBg: "#161329",
       date: "May 2024 - Sep 2024",
       points: [
@@ -68,7 +48,7 @@ import {
     {
       title: "Collaborative Projects",
       company_name: "Edunet Foundation | IBM SkillsBuild | AICTE",
-      icon: edunet,
+      icon: '',
       iconBg: "#161329",
       date: "June 2023 - July 2023",
       points: [

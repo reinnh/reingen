@@ -7,7 +7,7 @@ import CanvasLoader from "../component/loader";
 
 const ComputerModel = ({ isMobile }) => {
   const { scene } = useGLTF(
-    "./3ds/hologram1/scene.gltf",
+    "./3ds/photonic_convergence/scene.gltf",
     undefined,
     (loader) => {
       const dracoLoader = new DRACOLoader();
@@ -39,7 +39,7 @@ const ComputerModel = ({ isMobile }) => {
       <primitive
         ref={modelRef}
         object={scene}
-        scale={isMobile ? 0.4 : 0.5}
+        scale={isMobile ? 10 : 10}
         position={isMobile ? [0, -160, -1.5] : [0, -185, -1.5]}
         rotation={[-0.01, -0.2, -0.1]}
       />

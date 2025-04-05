@@ -33,6 +33,7 @@
     "react-router-dom": "^7.4.0",
     "react-scroll": "^1.9.3",
     "react-simple-typewriter": "^5.0.1",
+    "react-speech-recognition": "^4.0.0",
     "react-toastify": "^11.0.5",
     "react-vertical-timeline-component": "^3.5.3",
     "recharts": "^2.15.1",

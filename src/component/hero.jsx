@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import ComputersCanvas from "../canvas/herocanvas";
 import { Typewriter } from "react-simple-typewriter";
-import { Link } from "react-scroll";
 
 function TypingEffect() {
     return (
@@ -19,14 +18,11 @@ function TypingEffect() {
         </h1>
     );
 }
-
 export const Hero = () => {
     return (
-        <div className="relative h-screen w-full flex justify-center text-white bg-cover bg-center i "
+        <div className="relative h-[70vh] mb-10 md:h-screen w-full flex justify-center text-white bg-cover bg-center i "
             style={{ backgroundImage: "url('/herobg.png')" }}
         >
-           
-
             {/* Animated Hero Content */}
             <motion.div
                 className="relative flex flex-col gap-4  sm:text-5xl font-bold text-white z-10 container pt-15 md:pt-30 md:pl-15 pl-12"
@@ -43,12 +39,9 @@ export const Hero = () => {
                 </motion.div>
 
                 {/* Call to Action Buttons */}
-
             </motion.div>
-
             {/* Background Canvas Animation */}
             <div className="absolute inset-0 z-10">
-                <ComputersCanvas />
             </div>
         </div>
     );

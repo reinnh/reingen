@@ -23,7 +23,7 @@ function App() {
         <Route
           path="/"
           element={
-            <div className="bg-black pt-20">
+            <div className="bg-black pt-15 overflow-x-hidden">
               <Navbar />
               <Hero />
               <AboutMeCard />
