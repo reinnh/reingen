@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import ComputersCanvas from "../canvas/herocanvas";
 import { Typewriter } from "react-simple-typewriter";
 
 function TypingEffect() {
